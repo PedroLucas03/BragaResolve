@@ -1,6 +1,6 @@
+import 'package:braga_resolve/Screens/initialScreen.dart';
 import 'package:flutter/material.dart';
-import '../Components/barra_navegacao.dart';
-import '../main.dart';
+import '../Widgets/barra_navegacao.dart';
 
 class Budget extends StatefulWidget {
   const Budget({super.key});
@@ -10,7 +10,6 @@ class Budget extends StatefulWidget {
 }
 
 class _BudgetState extends State<Budget> {
-  
   bool pinturaExterna = false;
   bool pinturaInterna = false;
   bool usoMaterialPrestador = false;
@@ -34,7 +33,7 @@ class _BudgetState extends State<Budget> {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+              MaterialPageRoute(builder: (context) => const InitialScreen()),
               (route) => false,
             );
           },
@@ -56,7 +55,7 @@ class _BudgetState extends State<Budget> {
         padding: const EdgeInsets.only(left: 30.0, right: 30.0),
         child: Center(
           child: ListView(
-          children: [
+            children: [
               const Padding(
                 padding: EdgeInsets.only(top: 20.0),
                 child: Text(
@@ -236,129 +235,138 @@ class _BudgetState extends State<Budget> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                    // Switch Pintura Externa
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        // Switch Pintura Externa
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8.0,
+                            horizontal: 16.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Pintura Externa',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 59, 59, 59),
-                                ),
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Pintura Externa',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 59, 59, 59),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Pintura de paredes externas',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color.fromARGB(255, 120, 120, 120),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'Pintura de paredes externas',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color.fromARGB(255, 120, 120, 120),
-                                ),
+                              Switch(
+                                value: pinturaExterna,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    pinturaExterna = value;
+                                  });
+                                },
+                                activeThumbColor: Colors.white,
+                                activeTrackColor: Color(0xFFF2DB0D),
                               ),
                             ],
                           ),
-                          Switch(
-                            value: pinturaExterna,
-                            onChanged: (bool value) {
-                              setState(() {
-                                pinturaExterna = value;
-                              });
-                            },
-                            activeColor: Colors.white,
-                            activeTrackColor: Color(0xFFF2DB0D),
-                          ),
-                        ],
-                      ),
-                    ),
-                   
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Pintura Interna',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 59, 59, 59),
-                                ),
-                              ),
-                              Text(
-                                'Pintura de paredes internas',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color.fromARGB(255, 120, 120, 120),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Switch(
-                            value: pinturaInterna,
-                            onChanged: (bool value) {
-                              setState(() {
-                                pinturaInterna = value;
-                              });
-                            },
-                            activeColor: Colors.white,
-                            activeTrackColor: Color(0xFFF2DB0D),
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
 
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8.0,
+                            horizontal: 16.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Uso de Material do Prestador',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 59, 59, 59),
-                                ),
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Pintura Interna',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 59, 59, 59),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Pintura de paredes internas',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color.fromARGB(255, 120, 120, 120),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'Inclui tintas, pincéis, etc.',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color.fromARGB(255, 120, 120, 120),
-                                ),
+                              Switch(
+                                value: pinturaInterna,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    pinturaInterna = value;
+                                  });
+                                },
+                                activeThumbColor: Colors.white,
+                                activeTrackColor: Color(0xFFF2DB0D),
                               ),
                             ],
                           ),
-                          Switch(
-                            value: usoMaterialPrestador,
-                            onChanged: (bool value) {
-                              setState(() {
-                                usoMaterialPrestador = value;
-                              });
-                            },
-                            activeColor: Colors.white,
-                            activeTrackColor: Color(0xFFF2DB0D),
+                        ),
+
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8.0,
+                            horizontal: 16.0,
                           ),
-                        ],
-                      ),
-                    ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Uso de Material do Prestador',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 59, 59, 59),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Inclui tintas, pincéis, etc.',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color.fromARGB(255, 120, 120, 120),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Switch(
+                                value: usoMaterialPrestador,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    usoMaterialPrestador = value;
+                                  });
+                                },
+                                activeThumbColor: Colors.white,
+                                activeTrackColor: Color(0xFFF2DB0D),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-              
+
               Padding(
                 padding: const EdgeInsets.only(top: 30.0, bottom: 20.0),
                 child: SizedBox(
@@ -389,20 +397,16 @@ class _BudgetState extends State<Budget> {
           ),
         ),
       ),
-      
+
       bottomNavigationBar: CustomBottomNavigation(
-        currentIndex: 1, 
+        currentIndex: 1,
         onTap: (int index) {
-          
           switch (index) {
             case 0:
-              
               break;
             case 1:
-              
               break;
             case 2:
-              
               break;
           }
         },
@@ -410,10 +414,7 @@ class _BudgetState extends State<Budget> {
     );
   }
 
-
   void _salvarServico() {
-
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -428,7 +429,9 @@ class _BudgetState extends State<Budget> {
               const Text('Configurações:'),
               Text('• Pintura Externa: ${pinturaExterna ? "Sim" : "Não"}'),
               Text('• Pintura Interna: ${pinturaInterna ? "Sim" : "Não"}'),
-              Text('• Material do Prestador: ${usoMaterialPrestador ? "Sim" : "Não"}'),
+              Text(
+                '• Material do Prestador: ${usoMaterialPrestador ? "Sim" : "Não"}',
+              ),
             ],
           ),
           actions: [
