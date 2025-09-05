@@ -28,21 +28,23 @@ class _JobsPageState extends State<JobsPage> {
   List<Widget> _items() {
     List<Widget> items = [
       ListTile(
-        tileColor: Colors.grey.shade200,
+        onTap: () => showDialog(
+          context: context,
+          builder: (context) =>
+              AlertDialog(content: Text('Edição ainda não disponível')),
+        ),
         leading: Icon(Icons.format_paint),
         title: Text('Pintura Residencial'),
         subtitle: Text('A partir de R\$ 50/m²'),
         trailing: Switch(value: true, onChanged: (value) {}),
       ),
       ListTile(
-        tileColor: Colors.white,
         leading: Icon(Icons.electric_bolt),
         title: Text('Instalação Elétrica'),
         subtitle: Text('A partir de R\$ 80/h'),
         trailing: Switch(value: true, onChanged: (value) {}),
       ),
       ListTile(
-        tileColor: Colors.grey.shade200,
         leading: Icon(Icons.plumbing),
         title: Text('Encanamento'),
         subtitle: Text('A partir de R\$ 20/m'),

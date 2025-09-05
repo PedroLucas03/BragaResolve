@@ -1,133 +1,126 @@
-import 'package:braga_resolve/Screens/initialScreen.dart';
+import 'package:braga_resolve/Widgets/LoginScaffold.dart';
 import 'package:flutter/material.dart';
 
-class ClientLogin extends StatelessWidget {
+class ClientLogin extends StatefulWidget {
   const ClientLogin({super.key});
 
   @override
+  State<ClientLogin> createState() => _ClientLoginState();
+}
+
+class _ClientLoginState extends State<ClientLogin> {
+  @override
   Widget build(BuildContext context) {
-    const double topoHeight = 83;
-    const double logoHeight = 60;
+    final formKey = GlobalKey<FormState>();
+    final loginController = TextEditingController();
+    final passwordController = TextEditingController();
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          // Corpo
-          Padding(
-            padding: EdgeInsets.only(
-              top: topoHeight + logoHeight / 2,
-              bottom: 60,
-              left: 20,
-              right: 20,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  'Entrar como Cliente',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Email:',
-                  style: TextStyle(color: Colors.grey, fontSize: 14),
-                ),
-                const SizedBox(height: 5),
-                SizedBox(
-                  height: 40,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Image.asset(
-                        'assets/images/email_icon.png',
-                        height: 18,
-                        width: 18,
-                      ),
-                      hintText: 'Email',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 10,
+    return LoginScaffold(
+      appBarBuilder: (context) => AppBar(
+        backgroundColor: Colors.transparent,
+        title: Image.asset('assets/images/logo.png', height: 48),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                'Entrar como Cliente',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      controller: loginController,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.person),
+                        hintText: 'Login',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        contentPadding: const EdgeInsets.all(8),
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Senha:',
-                  style: TextStyle(color: Colors.grey, fontSize: 14),
-                ),
-                const SizedBox(height: 5),
-                SizedBox(
-                  height: 40,
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: Image.asset(
-                        'assets/images/lock_icon.png',
-                        height: 18,
-                        width: 18,
-                      ),
-                      hintText: 'Senha',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 10,
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => const RootTabs()),
-                      // );
-                    },
-                    child: const Text(
-                      'Esqueceu a senha?',
-                      style: TextStyle(color: Colors.black, fontSize: 12),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 15),
+                    SizedBox(height: 16),
+                    TextFormField(
+                      controller: passwordController,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.length < 6) {
+                          return 'A senha deve conter no mínimo 6 caracteres';
+                        }
+                        return null;
+                      },
 
-                SizedBox(
-                  height: 40,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => const RootTabs()),
-                      // );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFF2DB0D),
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      elevation: 0,
-                    ),
-                    child: const Text(
-                      'Entrar',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+
+                        hintText: 'Senha',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        contentPadding: const EdgeInsets.all(8),
                       ),
                     ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.centerRight,
+                child: InkWell(
+                  onTap: () {},
+                  child: const Text(
+                    'Esqueceu a senha?',
+                    style: TextStyle(color: Colors.black, fontSize: 12),
                   ),
                 ),
-                const SizedBox(height: 25),
-                Row(
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                height: 48,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      if (loginController.value.text == 'prestador' &&
+                          passwordController.value.text == 'prestador') {
+                        Navigator.of(context).pushNamed('/homepage');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Usuário e/ou senha incorretos!'),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFF2DB0D),
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: const Text(
+                    'Entrar',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 32),
+                child: Row(
                   children: [
                     Expanded(
                       child: Container(height: 1, color: Colors.grey[300]),
@@ -144,97 +137,51 @@ class ClientLogin extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 25),
-                SizedBox(
-                  height: 40,
-                  child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: Image.asset(
-                      'assets/images/google_logo.png',
-                      height: 20,
-                      width: 20,
-                    ),
-                    label: const Text(
-                      'Entrar com Google',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        side: const BorderSide(color: Colors.grey),
-                      ),
+              ),
+              SizedBox(
+                height: 48,
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'assets/images/google_logo.png',
+                    height: 20,
+                    width: 20,
+                  ),
+                  label: const Text(
+                    'Entrar com Google',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      side: const BorderSide(color: Colors.grey),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Não tem conta?",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Criar conta',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
+              ),
+              const SizedBox(height: 28),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Não tem conta?", style: TextStyle(fontSize: 12)),
+                  const SizedBox(width: 12),
+                  InkWell(
+                    onTap: () {},
+                    child: const Text(
+                      'Criar conta',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          // Topo
-          SizedBox(
-            width: double.infinity,
-            height: topoHeight,
-            child: Image.asset("assets/images/logo_top.jpg", fit: BoxFit.cover),
-          ),
-          // Seta de voltar
-          Positioned(
-            top: 20,
-            left: 10,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const InitialScreen(),
                   ),
-                );
-              },
-            ),
+                ],
+              ),
+            ],
           ),
-          // Logo pequeno
-          Positioned(
-            top: topoHeight - logoHeight / 2,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Image.asset('assets/images/logo.png', height: logoHeight),
-            ),
-          ),
-          // Footer
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: SizedBox(
-              width: double.infinity,
-              height: 110,
-              child: Image.asset("assets/images/footer.jpg", fit: BoxFit.cover),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

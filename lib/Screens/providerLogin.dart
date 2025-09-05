@@ -169,11 +169,11 @@ class _ProviderLoginState extends State<ProviderLogin> {
                   const SizedBox(width: 12),
                   InkWell(
                     onTap: () {},
-                    child: const Text(
+                    child: Text(
                       'Criar conta',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        // color: Theme.of(context).textTheme.displaySmall?.color,
                         fontSize: 12,
                       ),
                     ),

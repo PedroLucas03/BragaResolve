@@ -1,9 +1,9 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 class LoginScaffold extends StatelessWidget {
   const LoginScaffold({super.key, required this.body, this.appBarBuilder});
+
   final Widget body;
   final PreferredSizeWidget Function(BuildContext)? appBarBuilder;
 
@@ -11,6 +11,8 @@ class LoginScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        Container(color: Theme.of(context).scaffoldBackgroundColor),
+
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -18,6 +20,7 @@ class LoginScaffold extends StatelessWidget {
             headerAndFooterImage(context, true),
           ],
         ),
+
         Scaffold(
           appBar: _buildAppBar(context),
           backgroundColor: Colors.transparent,
@@ -34,7 +37,12 @@ class LoginScaffold extends StatelessWidget {
     if (appBarBuilder != null) {
       return appBarBuilder!(context);
     } else {
-      return AppBar(backgroundColor: Colors.transparent);
+      return AppBar(
+        backgroundColor:
+            Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.5) ??
+            Colors.transparent,
+        elevation: 0,
+      );
     }
   }
 
@@ -45,7 +53,7 @@ class LoginScaffold extends StatelessWidget {
       child: Transform(
         alignment: FractionalOffset.center,
         transform: rotate ? Matrix4.rotationZ(math.pi) : Matrix4.rotationZ(0),
-        child: Image.asset("assets/images/logo_top.jpg", fit: BoxFit.cover),
+        child: Image.asset("assets/images/logo_top.png", fit: BoxFit.cover),
       ),
     );
   }

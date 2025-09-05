@@ -54,7 +54,6 @@ class _HomePageState extends State<HomePage> {
           });
         },
         selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.black,
         currentIndex: currentPageIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Resumo'),
