@@ -1,5 +1,6 @@
 import 'package:braga_resolve/Screens/budgetPage.dart';
 import 'package:braga_resolve/Screens/jobsPage.dart';
+import 'package:braga_resolve/Screens/perfilscreen.dart';
 import 'package:braga_resolve/Screens/resumePage.dart';
 import 'package:braga_resolve/Screens/userPage.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     0: ResumePage(),
     1: BudgetPage(),
     2: JobsPage(),
-    3: UserPage(),
+    3: PerfilScreen(),
   };
   int currentPageIndex = 0;
 

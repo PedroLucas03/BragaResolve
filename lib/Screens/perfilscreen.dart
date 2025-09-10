@@ -1,3 +1,61 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+class PerfilScreen extends StatelessWidget {
+  const PerfilScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      slivers: <Widget>[
+        SliverAppBar(
+          stretch: false,
+          onStretchTrigger: () async {},
+          stretchTriggerOffset: 200.0,
+          expandedHeight: 200.0,
+          flexibleSpace: FlexibleSpaceBar(
+            expandedTitleScale: 1,
+            collapseMode: CollapseMode.pin,
+            centerTitle: true,
+            title: ClipOval(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: Border.all(width: 4),
+                ),
+                // width: MediaQuery.of(contextin).size.height,
+                // width: 96,
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/images/eubruno.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            background: Placeholder(),
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate((
+            BuildContext context,
+            int index,
+          ) {
+            return Container(
+              color: index.isOdd ? Colors.white : Colors.black12,
+              height: 100.0,
+              child: Center(
+                child: Text('$index', textScaler: const TextScaler.linear(5.0)),
+              ),
+            );
+          }, childCount: 20),
+        ),
+      ],
+    );
+  }
+}
+
 // import 'package:braga_resolve/Screens/initialScreen.dart';
 // import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
