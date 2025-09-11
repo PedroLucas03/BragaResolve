@@ -1,6 +1,8 @@
-import 'package:braga_resolve/Widgets/LoginScaffold.dart';
 import 'package:flutter/material.dart';
+import '../Widgets/LoginScaffold.dart';
+import '../shared/Organisms/organisms.dart';
 
+/// Tela inicial do aplicativo usando atomic design
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
 
@@ -8,66 +10,30 @@ class InitialScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoginScaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/logo.png', height: 100),
-          Column(
-            children: [
-              const Text(
-                'Bem Vindo!',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text(
+          // Organismo 1: Seção de boas-vindas
+          WelcomeSection(
+            title: 'Bem Vindo!',
+            subtitle:
                 'Conectando prestadores de serviços com clientes de forma rápida e eficiente.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15, color: Colors.grey),
-              ),
-            ],
           ),
-          Column(
-            children: [
-              optionButton(
-                context,
-                'Sou prestador',
-                Color(0xFFF9DC06),
-                '/provider',
-              ),
-              const SizedBox(height: 16),
-              optionButton(
-                context,
-                'Sou cliente',
-                Color(0xFFE5E7EB),
-                '/client',
-              ),
-            ],
+
+          const SizedBox(height: 40), // Espaçamento controlado
+          // Organismo 2: Seletor de tipo de usuário
+          UserTypeSelector(
+            providerText: 'Sou prestador',
+            clientText: 'Sou cliente',
+            providerIcon: Icons.work,
+            clientIcon: Icons.person,
+            onProviderPressed: () {
+              Navigator.pushNamed(context, '/provider');
+            },
+            onClientPressed: () {
+              Navigator.pushNamed(context, '/client');
+            },
           ),
         ],
-      ),
-    );
-  }
-
-  Widget optionButton(
-    BuildContext context,
-    String buttonText,
-    Color buttonColor,
-    String navigateTo,
-  ) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, navigateTo);
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor,
-          foregroundColor: Colors.black,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-        ),
-        child: Text(
-          buttonText,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-        ),
       ),
     );
   }
