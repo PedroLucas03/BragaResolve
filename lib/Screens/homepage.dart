@@ -2,7 +2,6 @@ import 'package:braga_resolve/Screens/budgetPage.dart';
 import 'package:braga_resolve/Screens/jobsPage.dart';
 import 'package:braga_resolve/Screens/perfilscreen.dart';
 import 'package:braga_resolve/Screens/resumePage.dart';
-import 'package:braga_resolve/Screens/userPage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
