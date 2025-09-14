@@ -27,13 +27,13 @@ class UserTypeSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Molécula 1: Cabeçalho da seção
+        
         SectionHeader(
           title: 'Escolha seu perfil',
           subtitle: 'Como você gostaria de usar nosso app?',
         ),
 
-        // Molécula 2: Seleção de botões usando UserTypeSelection
+        
         UserTypeSelection(
           onProviderTap:
               onProviderPressed ??

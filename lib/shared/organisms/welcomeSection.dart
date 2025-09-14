@@ -21,14 +21,14 @@ class WelcomeSection extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Molécula 1: Cabeçalho com logo e título
+        
         WelcomeHeader(
           title: title,
-          subtitle: '', // Remove subtitle do header
+          subtitle: '', 
           logoHeight: logoHeight,
         ),
 
-        // Molécula 2: Texto descritivo separado
+        
         DescriptionText(text: subtitle, topSpacing: spacing),
       ],
     );
