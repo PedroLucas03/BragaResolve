@@ -1,8 +1,8 @@
-import 'package:braga_resolve/Screens/budgetPage.dart';
-import 'package:braga_resolve/Screens/jobsPage.dart';
-import 'package:braga_resolve/Screens/perfilscreen.dart';
-import 'package:braga_resolve/Screens/resumePage.dart';
 import 'package:flutter/material.dart';
+import 'budgetPage.dart';
+import 'jobsPage.dart';
+import 'perfilscreen.dart';
+import 'resumePage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

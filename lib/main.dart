@@ -1,11 +1,11 @@
-import 'package:braga_resolve/Screens/homepage.dart';
-import 'package:braga_resolve/Screens/initialScreen.dart';
-import 'package:braga_resolve/Screens/providerLogin.dart';
-import 'package:braga_resolve/Screens/userPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Screens/clientLogin.dart';
+import 'Presentation/Screens/homepage.dart';
+import 'Presentation/Screens/initialScreen.dart';
+import 'Presentation/Screens/providerLogin.dart';
+import 'Presentation/Screens/userPage.dart';
+import 'Presentation/Screens/clientLogin.dart';
 
 void main() {
   runApp(

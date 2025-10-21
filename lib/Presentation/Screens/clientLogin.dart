@@ -1,15 +1,15 @@
-import 'package:braga_resolve/Widgets/LoginScaffold.dart';
 import 'package:flutter/material.dart';
-import '../shared/organisms/loginFormFields.dart';
+import '../Widgets/LoginScaffold.dart';
+import '../Organisms/loginFormFields.dart';
 
-class ProviderLogin extends StatefulWidget {
-  const ProviderLogin({super.key});
+class ClientLogin extends StatefulWidget {
+  const ClientLogin({super.key});
 
   @override
-  State<ProviderLogin> createState() => _ProviderLoginState();
+  State<ClientLogin> createState() => _ClientLoginState();
 }
 
-class _ProviderLoginState extends State<ProviderLogin> {
+class _ClientLoginState extends State<ClientLogin> {
   final _formKey = GlobalKey<FormState>();
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -20,8 +20,8 @@ class _ProviderLoginState extends State<ProviderLogin> {
       setState(() => _isLoading = true);
 
       Future.delayed(const Duration(seconds: 1), () {
-        if (_loginController.text == 'prestador' &&
-            _passwordController.text == 'prestador') {
+        if (_loginController.text == 'cliente' &&
+            _passwordController.text == 'cliente') {
           Navigator.of(context).pushNamed('/homepage');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -49,7 +49,7 @@ class _ProviderLoginState extends State<ProviderLogin> {
             passwordController: _passwordController,
             onLogin: _handleLogin,
             isLoading: _isLoading,
-            title: 'Entrar como Prestador',
+            title: 'Entrar como Cliente',
           ),
         ),
       ),

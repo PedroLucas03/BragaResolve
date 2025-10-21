@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:braga_resolve/Blocs/UserCommentBloc/user_comment_bloc.dart';
-import 'package:braga_resolve/Widgets/comment_list_tile.dart';
-import 'package:braga_resolve/Widgets/logo_progress_indicator.dart';
-import 'package:braga_resolve/repositories/user_comment_repository.dart';
+import 'package:braga_resolve/Presentation/Bloc/UserCommentBloc/user_comment_bloc.dart';
+import 'package:braga_resolve/Presentation/Widgets/comment_list_tile.dart';
+import 'package:braga_resolve/Presentation/Widgets/logo_progress_indicator.dart';
+import 'package:braga_resolve/Data/user_comment_repository.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

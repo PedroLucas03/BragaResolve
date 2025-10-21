@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:braga_resolve/Models/userComment/userComment.dart';
+import 'package:braga_resolve/Data/Models/userComment/userComment.dart';
 import 'package:http/http.dart' as http;
 
 class UserCommentsRepository {

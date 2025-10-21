@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Widgets/LoginScaffold.dart';
-import '../shared/Organisms/organisms.dart';
+import '../Organisms/organisms.dart';
 
 /// Tela inicial do aplicativo usando atomic design
 class InitialScreen extends StatelessWidget {
