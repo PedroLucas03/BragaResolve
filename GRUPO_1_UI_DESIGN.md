@@ -1,3 +1,27 @@
+# GRUPO 1 - UI/UX Design e Implementação
+
+## 🎯 Objetivo
+Criar o design no Figma e implementar a interface da tela de Orçamentos (BudgetPage)
+
+## 📋 Tarefas
+
+### Parte 1: Design no Figma (30 min)
+1. Criar um mockup da tela de orçamentos com:
+   - Header com título "Meus Orçamentos"
+   - Lista de cards de orçamentos
+   - Botão flutuante para adicionar novo orçamento
+   - Cada card deve mostrar: título, valor, status, data
+
+### Parte 2: Implementação no Flutter (60-90 min)
+2. Substituir o conteúdo da `BudgetPage` pelo código abaixo
+3. Personalizar cores e estilos conforme o design criado
+
+## 📁 Arquivo a ser modificado
+**Caminho:** `lib/Presentation/Screens/budgetPage.dart`
+
+## 💻 Código para implementar
+
+```dart
 import 'package:flutter/material.dart';
 
 class BudgetPage extends StatefulWidget {
@@ -182,3 +206,21 @@ class _BudgetPageState extends State<BudgetPage> {
     );
   }
 }
+```
+
+## 🎨 Dicas de Personalização
+- Altere as cores dos cards e status conforme seu design
+- Adicione ícones personalizados
+- Implemente animações nos cards
+- Customize o botão flutuante
+
+## ✅ Critérios de Avaliação
+- Design criativo e funcional no Figma
+- Implementação fiel ao design
+- Código limpo e organizado
+- Interface responsiva
+
+## 📱 Como testar
+1. Substitua o conteúdo do arquivo `budgetPage.dart`
+2. Execute o app e navegue até a aba "Orçamentos"
+3. Teste a rolagem da lista e o botão de adicionar

@@ -1,3 +1,104 @@
+# GRUPO 2 - API Integration e Backend
+
+## 🎯 Objetivo
+Integrar uma API REST na tela de Resumo (ResumePage) para exibir dados dinâmicos
+
+## 📋 Tarefas
+1. Criar serviço para consumir API de tarefas
+2. Implementar estados de loading e erro
+3. Exibir dados dinâmicos na tela de resumo
+4. Adicionar refresh para recarregar dados
+
+## 📁 Arquivos a serem criados/modificados
+
+### 1. Criar serviço de API
+**Caminho:** `lib/Data/Services/api_service.dart`
+
+```dart
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class ApiService {
+  static const String baseUrl = 'https://jsonplaceholder.typicode.com';
+
+  // Buscar lista de tarefas
+  static Future<List<Map<String, dynamic>>> getTasks() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/todos?_limit=10'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body);
+        return data.cast<Map<String, dynamic>>();
+      } else {
+        throw Exception('Falha ao carregar tarefas: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Erro de conexão: $e');
+    }
+  }
+
+  // Buscar estatísticas do usuário
+  static Future<Map<String, dynamic>> getUserStats() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/users/1'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        
+        // Simular estatísticas baseadas nos dados do usuário
+        return {
+          'totalTasks': 25,
+          'completedTasks': 18,
+          'pendingTasks': 7,
+          'totalEarnings': 2340.50,
+          'userName': data['name'] ?? 'Bruno Silva',
+          'userEmail': data['email'] ?? 'bruno@email.com',
+        };
+      } else {
+        throw Exception('Falha ao carregar estatísticas: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Erro de conexão: $e');
+    }
+  }
+
+  // Simular criação de nova tarefa
+  static Future<Map<String, dynamic>> createTask(Map<String, dynamic> taskData) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/todos'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode(taskData),
+      );
+
+      if (response.statusCode == 201) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Falha ao criar tarefa: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Erro de conexão: $e');
+    }
+  }
+}
+```
+
+### 2. Modificar ResumePage
+**Caminho:** `lib/Presentation/Screens/resumePage.dart`
+
+```dart
 import 'package:flutter/material.dart';
 import '../../Data/Services/api_service.dart';
 
@@ -81,9 +182,9 @@ class _ResumePageState extends State<ResumePage> {
               color: Colors.red,
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Erro ao carregar dados',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
@@ -262,3 +363,37 @@ class _ResumePageState extends State<ResumePage> {
     );
   }
 }
+```
+
+## 📦 Dependência necessária
+Adicionar no `pubspec.yaml`:
+```yaml
+dependencies:
+  http: ^1.1.0
+```
+
+## 🚀 Como implementar
+1. Executar `flutter pub get` para instalar a dependência http
+2. Criar o arquivo `api_service.dart` na pasta `lib/Data/Services/`
+3. Substituir o conteúdo do arquivo `resumePage.dart`
+4. Testar a conexão com a API
+
+## ✅ Funcionalidades implementadas
+- ✅ Consumo de API REST (JSONPlaceholder)
+- ✅ Estados de loading, erro e sucesso
+- ✅ Pull-to-refresh para recarregar dados
+- ✅ Tratamento de erros de conexão
+- ✅ Interface responsiva com cards de estatísticas
+- ✅ Lista dinâmica de tarefas
+
+## 🧪 Como testar
+1. Execute o app e vá para a aba "Resumo"
+2. Observe o loading inicial
+3. Teste o pull-to-refresh puxando a tela para baixo
+4. Simule erro desconectando a internet
+
+## 🔧 Possíveis melhorias
+- Implementar cache local
+- Adicionar paginação
+- Criar interceptors para autenticação
+- Implementar retry automático
