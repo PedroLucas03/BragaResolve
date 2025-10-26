@@ -1,21 +1,5 @@
-# GRUPO 3 - Calculadora de Orçamentos
-
-## 🎯 Objetivo
-Implementar uma calculadora simples para ajudar os prestadores a calcular orçamentos
-
-## 📋 Tarefas
-1. Criar uma calculadora de orçamentos
-2. Adicionar campos para material, mão de obra e extras
-3. Implementar cálculo automático com margem de lucro
-4. Integrar na navegação do app
-
-## 📁 Arquivo a ser criado
-
-### 1. Criar calculadora de orçamentos
-**Caminho:** `lib/Presentation/Screens/calculator_page.dart`
-
-```dart
 import 'package:flutter/material.dart';
+import '../../Utils/budget_calculator.dart';
 
 class CalculatorPage extends StatefulWidget {
   const CalculatorPage({super.key});
@@ -33,14 +17,26 @@ class _CalculatorPageState extends State<CalculatorPage> {
   double _profit = 0.2; // 20% de lucro padrão
 
   void _calculateTotal() {
-    final material = double.tryParse(_materialController.text) ?? 0;
-    final labor = double.tryParse(_laborController.text) ?? 0;
-    final extra = double.tryParse(_extraController.text) ?? 0;
-    
-    final subtotal = material + labor + extra;
-    setState(() {
-      _total = subtotal * (1 + _profit);
-    });
+    try {
+      final material = double.tryParse(_materialController.text) ?? 0;
+      final labor = double.tryParse(_laborController.text) ?? 0;
+      final extra = double.tryParse(_extraController.text) ?? 0;
+      
+      final calculatedTotal = BudgetCalculator.calculateBudget(
+        material: material,
+        labor: labor,
+        extras: extra,
+        profitMargin: _profit,
+      );
+      
+      setState(() {
+        _total = calculatedTotal;
+      });
+    } catch (e) {
+      setState(() {
+        _total = 0.0;
+      });
+    }
   }
 
   @override
@@ -63,6 +59,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
             
             // Campo Material
             TextField(
+              key: const Key('material_field'),
               controller: _materialController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -76,6 +73,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
             
             // Campo Mão de obra
             TextField(
+              key: const Key('labor_field'),
               controller: _laborController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -89,6 +87,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
             
             // Campo Extras
             TextField(
+              key: const Key('extra_field'),
               controller: _extraController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -103,6 +102,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
             // Slider de Lucro
             Text('Margem de Lucro: ${(_profit * 100).toInt()}%'),
             Slider(
+              key: const Key('profit_slider'),
               value: _profit,
               min: 0.0,
               max: 0.5,
@@ -129,7 +129,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'R\$ ${_total.toStringAsFixed(2)}',
+                      key: const Key('total_value'),
+                      BudgetCalculator.formatCurrency(_total),
                       style: const TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -147,6 +148,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               children: [
                 Expanded(
                   child: ElevatedButton(
+                    key: const Key('clear_button'),
                     onPressed: () {
                       _materialController.clear();
                       _laborController.clear();
@@ -162,6 +164,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
+                    key: const Key('save_button'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFF9DC06),
                     ),
@@ -169,7 +172,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
                       if (_total > 0) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Orçamento de R\$ ${_total.toStringAsFixed(2)} salvo!'),
+                            key: const Key('save_snackbar'),
+                            content: Text('Orçamento de ${BudgetCalculator.formatCurrency(_total)} salvo!'),
                           ),
                         );
                       }
@@ -185,54 +189,3 @@ class _CalculatorPageState extends State<CalculatorPage> {
     );
   }
 }
-```
-
-### 2. Modificar HomePage para adicionar acesso à calculadora
-**Modificar:** `lib/Presentation/Screens/homepage.dart`
-
-**Alterar o FloatingActionButton para abrir a calculadora:**
-
-```dart
-// Modificar o FloatingActionButton:
-floatingActionButton: FloatingActionButton(
-  onPressed: () {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const CalculatorPage(),
-      ),
-    );
-  },
-  backgroundColor: const Color(0xFFF9DC06),
-  child: const Icon(Icons.calculate, color: Colors.black),
-),
-
-// Adicionar import no topo do arquivo:
-import 'calculator_page.dart';
-```
-
-## 🚀 Como implementar
-1. Criar o arquivo `calculator_page.dart` na pasta `lib/Presentation/Screens/`
-2. Modificar `homepage.dart` para adicionar o FloatingActionButton
-3. Testar a calculadora
-
-## ✅ Funcionalidades implementadas
-- ✅ Calculadora de orçamentos com margem de lucro ajustável
-- ✅ Campos para material, mão de obra e custos extras
-- ✅ Cálculo automático em tempo real
-- ✅ Interface simples e intuitiva
-- ✅ Botões para limpar e salvar orçamento
-- ✅ Navegação integrada no app
-
-## 🧪 Como testar
-1. Execute o app
-2. Toque no FloatingActionButton (ícone de calculadora) na tela principal
-3. Preencha os campos com valores
-4. Ajuste a margem de lucro com o slider
-5. Observe o cálculo automático do total
-6. Teste os botões "Limpar" e "Salvar Orçamento"
-
-## 🎨 Funcionalidades extras (opcionais)
-- Adicionar mais campos de custo
-- Salvar histórico de orçamentos
-- Compartilhar orçamento por WhatsApp
-- Adicionar templates de orçamento

@@ -5,6 +5,7 @@ import 'jobsPage.dart';
 import 'perfilscreen.dart';
 import 'resumePage.dart';
 import 'notifications_page.dart';
+import 'calculator_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -115,20 +116,14 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Simular nova notificação
-          final newNotification = NotificationService.createRandomNotification();
-          NotificationService.addNotification(newNotification);
-          setState(() {});
-          
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Nova notificação recebida!'),
-              duration: Duration(seconds: 2),
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const CalculatorPage(),
             ),
           );
         },
         backgroundColor: const Color(0xFFF9DC06),
-        child: const Icon(Icons.add_alert, color: Colors.black),
+        child: const Icon(Icons.calculate, color: Colors.black),
       ),
     );
   }
