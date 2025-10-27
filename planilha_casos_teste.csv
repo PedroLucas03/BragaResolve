@@ -1,7 +1,0 @@
-ID do Caso,Tipo de Teste,Módulo/Classe Testada,Descrição do Cenário,Pré-Condição
-TU-01,Unitário,BudgetCalculator.calculateBudget(),"Verificar se um orçamento com formato válido é aceito e rejeitado com valores inválidos. Entrada: Material(100) + Mão de obra(200) + Extras(50) + Lucro(20%). Resultado esperado: R$ 420.00",Nenhuma
-TW-01,Widget,CalculatorPage,"Verificar se a tela de calculadora exibe todos os campos e botões corretamente. Validar presença de 7 widgets: campos Material/Mão de obra/Extras, slider de lucro, valor total, botões limpar/salvar",O usuário está na CalculatorScreen
-TI-01,Integração,InitialScreen → Navegação,"Verificar se um usuário pode ser direcionado da tela inicial e a navegação funciona. Validar carregamento da InitialScreen, título 'Bem Vindo!', botões 'Sou cliente' e 'Sou prestador'",O usuário está na tela inicial
-TU-02,Unitário,ApiService.fetchData(),"Verificar se dados válidos são retornados da API externa JSONPlaceholder. Validar retorno não nulo e estrutura correta do JSON",Conexão com internet disponível
-TW-02,Widget,BudgetPage,"Verificar se a lista de orçamentos e FAB são exibidos corretamente. Validar título 'Meus Orçamentos', FloatingActionButton visível, lista com 3 orçamentos mockados",O usuário está na BudgetPage
-TI-02,Integração,CalculatorPage → Cálculo → Salvamento,"Verificar se o usuário pode calcular, salvar orçamento e receber confirmação. Fluxo: preencher campos → cálculo automático (R$ 420.00) → salvar → confirmar mensagem",O usuário está na CalculatorPage

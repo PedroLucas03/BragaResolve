@@ -6,7 +6,7 @@ import 'package:braga_resolve/Presentation/Screens/initialScreen.dart';
 import 'package:braga_resolve/Presentation/Screens/calculator_page.dart';
 
 void main() {
-  group('TESTES DE INTEGRAÇÃO ', () {
+  group('TESTES DE INTEGRAÇÃO', () {
     
     testWidgets('Deve navegar corretamente entre telas principais', (WidgetTester tester) async {
       await tester.binding.setSurfaceSize(Size(400, 800));
