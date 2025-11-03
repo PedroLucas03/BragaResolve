@@ -5,6 +5,7 @@ import 'jobsPage.dart';
 import 'perfilscreen.dart';
 import 'resumePage.dart';
 import 'notifications_page.dart';
+import 'calculator_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final unreadCount = NotificationService.getUnreadCount();
-    
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -43,14 +44,16 @@ class _HomePageState extends State<HomePage> {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const NotificationsPage(),
-                    ),
-                  ).then((_) {
-                    // Atualizar a tela quando voltar
-                    setState(() {});
-                  });
+                  Navigator.of(context)
+                      .push(
+                        MaterialPageRoute(
+                          builder: (context) => const NotificationsPage(),
+                        ),
+                      )
+                      .then((_) {
+                        // Atualizar a tela quando voltar
+                        setState(() {});
+                      });
                 },
                 icon: const Icon(Icons.notifications, color: Colors.black),
               ),
@@ -82,7 +85,9 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           IconButton(
-            onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false),
+            onPressed: () => Navigator.of(
+              context,
+            ).pushNamedAndRemoveUntil('/', (route) => false),
             icon: const Icon(Icons.exit_to_app_rounded, color: Colors.red),
           ),
         ],
@@ -100,35 +105,40 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.amber,
         currentIndex: currentPageIndex,
         items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Resumo'),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Resumo',
+          ),
           BottomNavigationBarItem(
             icon: Badge(
-              label: Text(NotificationService.getUnreadCount() > 0 ? '${NotificationService.getUnreadCount()}' : ''),
+              label: Text(
+                NotificationService.getUnreadCount() > 0
+                    ? '${NotificationService.getUnreadCount()}'
+                    : '',
+              ),
               isLabelVisible: NotificationService.getUnreadCount() > 0,
               child: const Icon(Icons.request_page),
             ),
             label: 'Orçamentos',
           ),
-          const BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Serviços'),
-          const BottomNavigationBarItem(icon: Icon(Icons.person_2), label: 'Meu Perfil'),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.build),
+            label: 'Serviços',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.person_2),
+            label: 'Meu Perfil',
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Simular nova notificação
-          final newNotification = NotificationService.createRandomNotification();
-          NotificationService.addNotification(newNotification);
-          setState(() {});
-          
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Nova notificação recebida!'),
-              duration: Duration(seconds: 2),
-            ),
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const CalculatorPage()),
           );
         },
         backgroundColor: const Color(0xFFF9DC06),
-        child: const Icon(Icons.add_alert, color: Colors.black),
+        child: const Icon(Icons.calculate, color: Colors.black),
       ),
     );
   }
