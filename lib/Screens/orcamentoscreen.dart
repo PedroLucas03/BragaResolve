@@ -28,20 +28,11 @@ class _BudgetState extends State<Budget> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.grey, size: 30.0),
-          onPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const InitialScreen()),
-              (route) => false,
-            );
-          },
-        ),
+        leading: Container(),
         actions: [
           IconButton(
-            icon: const Icon(Icons.delete, color: Colors.grey, size: 30.0),
-            onPressed: () {},
+            icon: const Icon(Icons.close, color: Colors.grey, size: 30.0),
+            onPressed: () => Navigator.of(context).pop(),
           ),
           const Padding(
             padding: EdgeInsets.only(right: 16.0),

@@ -2,8 +2,11 @@ import 'package:braga_resolve/Screens/budgetPage.dart';
 import 'package:braga_resolve/Screens/jobsPage.dart';
 import 'package:braga_resolve/Screens/perfilscreen.dart';
 import 'package:braga_resolve/Screens/resumePage.dart';
+import 'package:braga_resolve/Screens/orcamentoscreen.dart';
 import 'package:braga_resolve/Screens/userPage.dart';
+import 'package:braga_resolve/main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,6 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -36,6 +40,19 @@ class _HomePageState extends State<HomePage> {
         title: Text('Olá, Bruno!', style: TextStyle(color: Colors.black)),
         centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () {
+              themeProvider.toggleTheme(
+                themeProvider.themeMode == ThemeMode.light,
+              );
+            },
+            icon: Icon(
+              themeProvider.themeMode == ThemeMode.light
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+            ),
+          ),
+          const SizedBox(width: 24),
           IconButton(
             onPressed: () => Navigator.of(
               context,

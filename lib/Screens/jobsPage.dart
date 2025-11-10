@@ -1,3 +1,4 @@
+import 'package:braga_resolve/Screens/orcamentoscreen.dart';
 import 'package:flutter/material.dart';
 
 class JobsPage extends StatefulWidget {
@@ -10,17 +11,28 @@ class JobsPage extends StatefulWidget {
 class _JobsPageState extends State<JobsPage> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Meus serviços', style: TextStyle(fontSize: 28)),
-          const SizedBox(height: 32),
-          Expanded(
-            child: ListView(padding: EdgeInsets.zero, children: _items()),
-          ),
-        ],
+    return Scaffold(
+      floatingActionButton: ElevatedButton(
+        onPressed: () => showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          enableDrag: false,
+          builder: (context) => Budget(),
+        ),
+        child: Text('Novo serviço'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Meus serviços', style: TextStyle(fontSize: 28)),
+            const SizedBox(height: 32),
+            Expanded(
+              child: ListView(padding: EdgeInsets.zero, children: _items()),
+            ),
+          ],
+        ),
       ),
     );
   }
