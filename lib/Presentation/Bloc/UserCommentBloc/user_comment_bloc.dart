@@ -1,5 +1,5 @@
 import 'package:braga_resolve/Data/Models/userComment/userComment.dart';
-import 'package:braga_resolve/Data/user_comment_repository.dart';
+import 'package:braga_resolve/Data/repositories/user_comment_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'user_comment_event.dart';

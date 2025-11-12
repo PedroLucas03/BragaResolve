@@ -6,8 +6,17 @@ import 'Presentation/Screens/initialScreen.dart';
 import 'Presentation/Screens/providerLogin.dart';
 import 'Presentation/Screens/userPage.dart';
 import 'Presentation/Screens/clientLogin.dart';
+import 'Presentation/Screens/client_signup.dart';
+import 'firebase_options.dart'; 
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+
+
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeProvider(),
@@ -15,6 +24,8 @@ void main() {
     ),
   );
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -40,6 +51,7 @@ class MyApp extends StatelessWidget {
         '/provider': (BuildContext context) => const ProviderLogin(),
         '/client': (BuildContext context) => const ClientLogin(),
         '/homepage': (BuildContext context) => const HomePage(),
+        '/signup': (context) => const ClientSignup(),
         '/user': (BuildContext context) => const UserPage(),
       },
     );

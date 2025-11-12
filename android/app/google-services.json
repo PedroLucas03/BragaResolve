@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "787393223227",
+    "project_id": "bragaresolve-f184d",
+    "storage_bucket": "bragaresolve-f184d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787393223227:android:7870ec255830231fdf9a1e",
+        "android_client_info": {
+          "package_name": "com.example.braga_resolve"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeruiIPUcQP1eo4u2bKkDTproPi80_jFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

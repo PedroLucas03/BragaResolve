@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../Widgets/LoginScaffold.dart';
-import '../Organisms/loginFormFields.dart';
+import '../Components/Organisms/loginFormFields.dart';
 
 class ProviderLogin extends StatefulWidget {
   const ProviderLogin({super.key});
@@ -15,21 +16,37 @@ class _ProviderLoginState extends State<ProviderLogin> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
 
-  void _handleLogin() {
+  Future<void> _handleLogin() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
 
-      Future.delayed(const Duration(seconds: 1), () {
-        if (_loginController.text == 'prestador' &&
-            _passwordController.text == 'prestador') {
+      try {
+        // Tenta fazer login com o e-mail e senha cadastrados no Firebase
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _loginController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+
+        if (mounted) {
           Navigator.of(context).pushNamed('/homepage');
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Usuário e/ou senha incorretos!')),
-          );
         }
+      } on FirebaseAuthException catch (e) {
+        String message = 'Erro ao fazer login.';
+
+        if (e.code == 'user-not-found') {
+          message = 'Usuário não encontrado.';
+        } else if (e.code == 'wrong-password') {
+          message = 'Senha incorreta.';
+        } else if (e.code == 'invalid-email') {
+          message = 'E-mail inválido.';
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      } finally {
         if (mounted) setState(() => _isLoading = false);
-      });
+      }
     }
   }
 

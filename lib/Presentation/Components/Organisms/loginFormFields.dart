@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Molecules/loginField.dart';
-import '../Molecules/actionButton.dart';
+import '../Molecules/ActionButton.dart';
 import '../Molecules/socialLoginButton.dart';
 import '../Molecules/sectionDivider.dart';
 
@@ -90,12 +90,15 @@ class LoginFormFields extends StatelessWidget {
             const Text("Não tem conta?", style: TextStyle(fontSize: 12)),
             const SizedBox(width: 12),
             InkWell(
-              onTap: () {},
-              child: const Text(
-                'Criar conta',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-              ),
-            ),
+  onTap: () {
+    Navigator.of(context).pushNamed('/signup'); 
+  },
+  child: const Text(
+    'Criar conta',
+    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+  ),
+),
+
           ],
         ),
       ],

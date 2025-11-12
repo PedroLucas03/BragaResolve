@@ -2,7 +2,7 @@
 export 'userTypeSelection.dart';
 export 'welcomeHeader.dart';
 export 'loginField.dart';
-export 'actionButton.dart';
+export '../Molecules/actionButton.dart';
 export 'socialLoginButton.dart';
 export 'sectionDivider.dart';
 export 'actionLink.dart';
